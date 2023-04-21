@@ -59,6 +59,10 @@ class Signup (View):
             error_message = 'Phone Number must be 10 char Long'
         elif len (customer.password) < 5:
             error_message = 'Password must be 5 char long'
+        elif not any([char.isdigit() for char in customer.password]):
+            error_message = 'Password requires a digit'
+        elif not any([char.isupper() for char in customer.password]):
+            error_message = 'Password requires a capital letter'
         elif len (customer.email) < 5:
             error_message = 'Email must be 5 char long'
         elif customer.isExists ():
