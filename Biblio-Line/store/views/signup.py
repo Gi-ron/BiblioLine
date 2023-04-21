@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password
 from store.models.customer import Customer
 from django.views import View
+import string
 
 
 class Signup (View):
@@ -57,12 +58,14 @@ class Signup (View):
             error_message = 'Enter your Phone Number'
         elif len (customer.phone) < 10:
             error_message = 'Phone Number must be 10 char Long'
-        elif len (customer.password) < 5:
-            error_message = 'Password must be 5 char long'
+        elif len (customer.password) < 7:
+            error_message = 'Password must be 7 char long'
         elif not any([char.isdigit() for char in customer.password]):
             error_message = 'Password requires a digit'
         elif not any([char.isupper() for char in customer.password]):
-            error_message = 'Password requires a capital letter'
+            error_message = 'Password requires a capital'
+        elif not any([True if char in string.punctuation else False for char in customer.password]):
+            error_message = 'Password requires a special character' 
         elif len (customer.email) < 5:
             error_message = 'Email must be 5 char long'
         elif customer.isExists ():
