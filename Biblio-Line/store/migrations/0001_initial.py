@@ -43,6 +43,7 @@ class Migration(migrations.Migration):
                 ('description', models.CharField(blank=True, default='', max_length=250, null=True)),
                 ('image', models.ImageField(upload_to='uploads/products/')),
                 ('category', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='store.category')),
+                ('author', models.CharField(max_length=150)),
             ],
         ),
         migrations.CreateModel(
@@ -60,7 +61,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='countries',
+            name='country',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=150)),
@@ -68,7 +69,7 @@ class Migration(migrations.Migration):
         ),
 
         migrations.CreateModel(
-            name='countries',
+            name='city',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('idcountry', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='store.country')),

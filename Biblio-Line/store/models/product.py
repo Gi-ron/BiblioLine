@@ -7,10 +7,12 @@ class Products(models.Model):
     category= models.ForeignKey(Category,on_delete=models.CASCADE,default=1 )
     description= models.CharField(max_length=250, default='', blank=True, null= True)
     image= models.ImageField(upload_to='uploads/products/')
+    author = models.CharField(max_length=150)
 
     @staticmethod
     def get_products_by_id(ids):
         return Products.objects.filter (id__in=ids)
+    
     @staticmethod
     def get_all_products():
         return Products.objects.all()

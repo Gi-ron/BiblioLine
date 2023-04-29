@@ -11,7 +11,9 @@ class Signup (View):
     def get(self, request):
         data={}
         countries = Country.get_all_countreis()
-        cities = City.get_all_countreis()
+        cities = City.get_all_cities()
+
+            
         data['countries'] = countries
         data['cities'] = cities
         
@@ -62,10 +64,12 @@ class Signup (View):
                 'error': error_message,
                 'values': value
             }
-            countries = Country.get_all_countreis()
-            cities = City.get_all_countreis()
+            countries = Country.get_all_countreis() 
+            cities = City.get_all_cities()
+                
             data['countries'] = countries
             data['cities'] = cities
+            
 
             return render (request, 'signup.html', data)
 

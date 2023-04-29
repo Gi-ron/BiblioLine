@@ -58,9 +58,10 @@
                 </div>
 
                 <!-- country and city -->
-                <div class="form-group" style="margin-top: 2rem;">
+                <div class="form-group" style="margin-top: 2rem; ">
                     <label for=""> Country </label>
                     <select  style="width: 8rem;" name = 'country'>
+                        <option> -- select --</option>
                         {% for country in countries %}
                         <option value="{value.country.name}" >
                             <a href="/?country={{country.id}}"
