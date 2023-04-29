@@ -44,6 +44,12 @@ class Migration(migrations.Migration):
                 ('image', models.ImageField(upload_to='uploads/products/')),
                 ('category', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='store.category')),
                 ('author', models.CharField(max_length=150)),
+                ('date_publi', models.DateField()),
+                ('pages', models.IntegerField(default=0)),
+                ('publisher', models.CharField(max_length=60)),
+                ('language', models.CharField(max_length=60)),
+                ('state',  models.CharField(max_length=15))
+            
             ],
         ),
         migrations.CreateModel(

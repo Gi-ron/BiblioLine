@@ -6,7 +6,9 @@ from .models.orders import Order
 
 
 class AdminProduct(admin.ModelAdmin):
-    list_display = ['name', 'price', 'category']
+    list_display = ['name', 'price', 'category', 'author', 'date_publi', 'pages',
+                    'publisher', 'language', 'state'
+                    ]
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -19,4 +21,4 @@ admin.site.register(Customer)
 admin.site.register(Order)
 
 
-# username = Andres001  password = biblioline001
+# username = admin  password = biblioline001

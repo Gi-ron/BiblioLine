@@ -8,6 +8,13 @@ class Products(models.Model):
     description= models.CharField(max_length=250, default='', blank=True, null= True)
     image= models.ImageField(upload_to='uploads/products/')
     author = models.CharField(max_length=150)
+    date_publi = models.DateField()
+    pages = models.IntegerField()
+    publisher = models.CharField(max_length=60)
+    language = models.CharField(max_length=60)
+    state = models.CharField(max_length=15)
+
+
 
     @staticmethod
     def get_products_by_id(ids):
