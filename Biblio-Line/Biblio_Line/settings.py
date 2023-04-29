@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'Biblio_Line.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'biblio-linebd',
+        'NAME': 'bibliolinedb',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '1200',
         'HOST': 'localhost',
         'PORT': '3306',
     }

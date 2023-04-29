@@ -10,6 +10,7 @@ from .middlewares.auth import  auth_middleware
 
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('', Index.as_view(), name='homepage'),
     path('store', store , name='store'),
 
