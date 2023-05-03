@@ -57,17 +57,35 @@
                     class=" form-control-sm form-control" placeholder="abc@gmail.com">
                 </div>
 
-                <!-- city and country-->
-                <div class="form-group">
+                <!-- country and city -->
+                <div class="form-group" style="margin-top: 2rem; ">
                     <label for=""> Country </label>
-                    <select name="country">
-                        <option value="">option</option>
+                    <select  style="width: 8rem;" name = 'country'>
+                        <option> -- select --</option>
+                        {% for country in countries %}
+                        <option value="{value.country.name}" >
+                            <a href="/?country={{country.id}}"
+                            class="list-group-item list-group-item-action btn btn-outline-success ">{{country.name}}</a> 
+                        </option>
+                        {% endfor %}
                     </select>
 
-                    <label for=""> City </label>
-                    <select name="city">
-                        <option value="">option</option>
+                    <label for="" style="margin-left: 2rem;"> City </label>
+                    <select name="city" style="width: 8rem;">
+                        
+                        {% for city in cities %}
+
+                        <option value=""> <a href="/?city={{city.id}}"
+                            class="list-group-item list-group-item-action btn btn-outline-success ">{{city.name}}</a> </option>
+                        {% endfor %}
                     </select>
+
+                    <!-- address -->
+                    <div class="form-group">
+                        <label for=""><Address></Address></label>
+                        <input required type="text" name="address" id=""
+                        class=" form-control-sm form-control" placeholder="abc@gmail.com">
+                    </div>
 
                 </div>
 
@@ -77,7 +95,8 @@
                     <input type="date" 
                     name="date" 
                     id=""
-                     class="form-control form-control-sm">  
+                     class="form-control form-control-sm"
+                     value="{{values.date}}">  
                 </div>
 
                 <!-- password -->
