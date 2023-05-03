@@ -43,14 +43,14 @@ class Account (View):
             email,
             address,
         )
-        
+
         id = request.session.get('customer')
 
         customer = Customer.get_customer_by_id(id)
         customer.update(data)
 
         return redirect('homepage')
-      
+
 
     def validateCustomer(self, customer, confirm):
         error_message = None
@@ -80,7 +80,7 @@ class Account (View):
             error_message = 'Email Address Already Registered..'
         elif customer.password != confirm:
             error_message  = 'The passwords do not match'
-        
+
         # saving
 
         return error_message

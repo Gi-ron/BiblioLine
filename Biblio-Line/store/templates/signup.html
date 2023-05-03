@@ -4,10 +4,10 @@
 {% block content %}
 
 <div class="container mt-4">
-    
+
     <div class="p-3 m-3">
 
-        
+
         <div class="col-lg-5 rounded mx-auto border pt-4">
             <div class="text-center col">
             <!--AGREGAR IMAGEN AQUI-->
@@ -16,7 +16,7 @@
             </div>
             <h3 class="alert alert-success rounded-pill" style="text-align:center">Create an Account</h3>
             <form action="/signup" method="POST">
-                
+
                 {% csrf_token %}
 
                 {% if error%}
@@ -64,14 +64,14 @@
                         {% for country in countries %}
                         <option>
                             <a href="/?country={{country.id}}"
-                            class="list-group-item list-group-item-action btn btn-outline-success ">{{country.name}}</a> 
+                            class="list-group-item list-group-item-action btn btn-outline-success ">{{country.name}}</a>
                         </option>
                         {% endfor %}
                     </select>
 
                     <label for="" style="margin-left: 2rem;"> City </label>
                     <select name="city" style="width: 8rem;">
-                        
+
                         {% for city in cities %}
 
                         <option value=""> <a href="/?city={{city.id}}"
@@ -91,26 +91,26 @@
                 <!-- Date -->
                 <div class="form-group">
                     <label for="">Date of birth</label>
-                    <input type="date" 
-                    name="date" 
+                    <input type="date"
+                    name="date"
                     id=""
                      class="form-control form-control-sm"
-                     value="{{values.date}}">  
+                     value="{{values.date}}">
                 </div>
 
                 <!-- password -->
                 <div class="form-group">
                     <label for="">Password</label>
-                    <input type="password" 
-                    name="password" 
+                    <input type="password"
+                    name="password"
                     id=""
                      class="form-control form-control-sm">
                 </div>
 
                 <div class="form-group">
                     <label for="">Confirm Password</label>
-                    <input type="password" 
-                    name="confirmpassword" 
+                    <input type="password"
+                    name="confirmpassword"
                     id=""
                      class="form-control form-control-sm">
                 </div>

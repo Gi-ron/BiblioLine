@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'Biblio_Line.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bibliolinedb',
         'USER': 'root',
         'PASSWORD': '1200',

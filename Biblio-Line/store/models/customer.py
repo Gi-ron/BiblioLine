@@ -13,8 +13,7 @@ class Customer(models.Model):
     #to save the data
     def register(self):
         self.save()
-    
-       
+
     def update(self, data):
         self.first_name = data[0]
         self.last_name = data[1]
@@ -23,7 +22,9 @@ class Customer(models.Model):
         self.address = data[4]
         self.save()
 
-
+    def change_password(self, new_password):
+        self.password = new_password
+        self.save()
 
     @staticmethod
     def get_customer_by_id(id):
@@ -38,12 +39,9 @@ class Customer(models.Model):
             return Customer.objects.get(email= email)
         except:
             return False
-    
-
 
     def isExists(self):
         if Customer.objects.filter(email = self.email):
             return True
 
         return False
-        
