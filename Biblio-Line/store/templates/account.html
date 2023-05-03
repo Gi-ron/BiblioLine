@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container mt-4">
+    
+    <div class="p-3 m-3">
+
+        
+        <div class="col-lg-5 rounded mx-auto border pt-4">
+            <div class="text-center col">
+            <!--AGREGAR IMAGEN AQUI-->
+            <!-- <hr> -->
+            <hr>
+            </div>
+            <h3 class="alert alert-success rounded-pill" style="text-align:center">Account</h3>
+            <form action="/account" method="POST">
+                
+                {% csrf_token %}
+
+                {% if error%}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+                {% endif %}
+                <!-- firstname -->
+                <div class="form-group">
+                    <label for="">First Name</label>
+                    <input type="text" name="firstname"
+                     id="" value="{{first_name}}" class="form-control form-control-sm" 
+                     placeholder="">
+                </div>
+
+                <!-- last name -->
+                <div class="form-group">
+                    <label for="">Last Name</label>
+                    <input type="text" name="lastname" 
+                    id="" value="{{last_name}}" class="form-control form-control-sm"
+                    >
+                </div>
+
+                <!-- phone -->
+                <div class="form-group">
+                    <label for="">Phone</label>
+                    <input type="text" name="phone" 
+                    id="" class="form-control form-control-sm"
+                    value="{{phone}}"
+                    placeholder="XXXXXXXXXX"
+                    >
+                </div>
+                <!-- email -->
+                <div class="form-group">
+                    <label for="">Email</label>
+                    <input required type="email" name="email" id=""
+                    value="{{email}}" 
+                    class=" form-control-sm form-control" placeholder="">
+                </div>
+
+
+                <!-- address -->
+                <div class="form-group">
+                    <label for="">Address</label>
+                    <input required type="text" name="address" id=""
+                    class=" form-control-sm form-control" placeholder="" value="{{address}}">
+                </div>
+
+
+                <!-- Description -->
+                <div class="form-group">
+                    <label for="">Description</label>
+                    <input type="text" 
+                    name="date" 
+                    id=""
+                     class="form-control form-control-sm"
+                     value="{{date}}">  
+                </div>
+
+                <hr>
+                <button type="submit" class="btn btn-sm btn-success col-lg-12">Save</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

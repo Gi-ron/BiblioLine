@@ -2,12 +2,22 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password
 from store.models.customer import Customer
 from django.views import View
+from store.models.country import Country
+from store.models.city import  City
 import string
 
 
 class Signup (View):
     def get(self, request):
-        return render (request, 'signup.html')
+        data={}
+        countries = Country.get_all_countreis()
+        cities = City.get_all_cities()
+
+            
+        data['countries'] = countries
+        data['cities'] = cities
+        
+        return render (request, 'signup.html', data)
 
     def post(self, request):
         postData = request.POST
@@ -16,12 +26,22 @@ class Signup (View):
         phone = postData.get ('phone')
         email = postData.get ('email')
         password = postData.get ('password')
+        confirmpassword = postData.get('confirmpassword')
+        date = postData.get('date')
+        address = postData.get('address')
+        country = postData.get('country')
+        print(country)
+        
+        
         # validation
         value = {
             'first_name': first_name,
             'last_name': last_name,
             'phone': phone,
-            'email': email
+            'email': email,
+            'date' : date,
+            'address': address,
+            'country':country
         }
         error_message = None
 
@@ -29,8 +49,12 @@ class Signup (View):
                              last_name=last_name,
                              phone=phone,
                              email=email,
-                             password=password)
-        error_message = self.validateCustomer (customer)
+                             password=password,
+                             date = date,
+                             address = address,
+                             country = country)
+
+        error_message = self.validateCustomer (customer, confirmpassword)
 
         if not error_message:
             print (first_name, last_name, phone, email, password)
@@ -42,9 +66,16 @@ class Signup (View):
                 'error': error_message,
                 'values': value
             }
+            countries = Country.get_all_countreis()
+            cities = City.get_all_cities()
+                
+            data['countries'] = countries
+            data['cities'] = cities
+            
+
             return render (request, 'signup.html', data)
 
-    def validateCustomer(self, customer):
+    def validateCustomer(self, customer, confirm):
         error_message = None
         if (not customer.first_name):
             error_message = "Please Enter your First Name !!"
@@ -70,6 +101,9 @@ class Signup (View):
             error_message = 'Email must be 5 char long'
         elif customer.isExists ():
             error_message = 'Email Address Already Registered..'
+        elif customer.password != confirm:
+            error_message  = 'The passwords do not match'
+        
         # saving
 
         return error_message

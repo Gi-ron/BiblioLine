@@ -29,6 +29,9 @@ class Migration(migrations.Migration):
                 ('phone', models.CharField(max_length=10)),
                 ('email', models.EmailField(max_length=254)),
                 ('password', models.CharField(max_length=100)),
+                ('date', models.DateField() ),
+                ('address', models.CharField(max_length=250)),
+                ('country', models.CharField(max_length=100))
             ],
         ),
         migrations.CreateModel(
@@ -40,6 +43,13 @@ class Migration(migrations.Migration):
                 ('description', models.CharField(blank=True, default='', max_length=250, null=True)),
                 ('image', models.ImageField(upload_to='uploads/products/')),
                 ('category', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='store.category')),
+                ('author', models.CharField(max_length=150)),
+                ('date_publi', models.DateField()),
+                ('pages', models.IntegerField(default=0)),
+                ('publisher', models.CharField(max_length=60)),
+                ('language', models.CharField(max_length=60)),
+                ('state',  models.CharField(max_length=15))
+            
             ],
         ),
         migrations.CreateModel(
@@ -56,4 +66,22 @@ class Migration(migrations.Migration):
                 ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='store.products')),
             ],
         ),
+        migrations.CreateModel(
+            name='country',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=150)),
+            ],
+        ),
+
+        migrations.CreateModel(
+            name='city',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('idcountry', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='store.country')),
+                ('name', models.CharField(max_length=150)),
+            ],
+        ),
+
+
     ]
