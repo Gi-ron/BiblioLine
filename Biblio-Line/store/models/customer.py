@@ -13,7 +13,24 @@ class Customer(models.Model):
     #to save the data
     def register(self):
         self.save()
+    
+       
+    def update(self, data):
+        self.first_name = data[0]
+        self.last_name = data[1]
+        self.phone = data[2]
+        self.email = data[3]
+        self.address = data[4]
+        self.save()
 
+
+
+    @staticmethod
+    def get_customer_by_id(id):
+        try:
+            return Customer.objects.get(id = id)
+        except:
+            return False
 
     @staticmethod
     def get_customer_by_email(email):
@@ -21,6 +38,7 @@ class Customer(models.Model):
             return Customer.objects.get(email= email)
         except:
             return False
+    
 
 
     def isExists(self):

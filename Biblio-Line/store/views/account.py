@@ -9,14 +9,21 @@ import string
 
 class Account (View):
     def get(self, request):
-        data={}
-        countries = Country.get_all_countreis()
-        cities = City.get_all_cities()
+        id = request.session.get('customer')
+        print(id)
 
-            
-        data['countries'] = countries
-        data['cities'] = cities
-        
+        customer = Customer.get_customer_by_id(id)
+
+        data = {
+            'first_name': customer.first_name,
+            'last_name': customer.last_name,
+            'phone': customer.phone,
+            'email': customer.email,
+            'date' : customer.date,
+            'address': customer.address,
+            'country':customer.country
+        }
+
         return render (request, 'account.html', data)
 
     def post(self, request):
@@ -25,53 +32,25 @@ class Account (View):
         last_name = postData.get ('lastname')
         phone = postData.get ('phone')
         email = postData.get ('email')
-        password = postData.get ('password')
-        confirmpassword = postData.get('confirmpassword')
         date = postData.get('date')
         address = postData.get('address')
-        country = postData.get('country')
+
+                # validation
+        data = (
+            first_name,
+            last_name,
+            phone,
+            email,
+            address,
+        )
         
-        # validation
-        value = {
-            'first_name': first_name,
-            'last_name': last_name,
-            'phone': phone,
-            'email': email,
-            'date' : date,
-            'address': address,
-            'country':country
-        }
-        error_message = None
+        id = request.session.get('customer')
 
-        customer = Customer (first_name=first_name,
-                             last_name=last_name,
-                             phone=phone,
-                             email=email,
-                             password=password,
-                             date = date,
-                             address = address,
-                             country = country)
+        customer = Customer.get_customer_by_id(id)
+        customer.update(data)
 
-        error_message = self.validateCustomer (customer, confirmpassword)
-
-        if not error_message:
-            print (first_name, last_name, phone, email, password)
-            customer.password = make_password (customer.password)
-            customer.register ()
-            return redirect ('homepage')
-        else:
-            data = {
-                'error': error_message,
-                'values': value
-            }
-            countries = Country.get_all_countreis() 
-            cities = City.get_all_cities()
-                
-            data['countries'] = countries
-            data['cities'] = cities
-            
-
-            return render (request, 'account.html', data)
+        return redirect('homepage')
+      
 
     def validateCustomer(self, customer, confirm):
         error_message = None

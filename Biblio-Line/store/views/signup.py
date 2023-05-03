@@ -30,6 +30,8 @@ class Signup (View):
         date = postData.get('date')
         address = postData.get('address')
         country = postData.get('country')
+        print(country)
+        
         
         # validation
         value = {
@@ -64,7 +66,7 @@ class Signup (View):
                 'error': error_message,
                 'values': value
             }
-            countries = Country.get_all_countreis() 
+            countries = Country.get_all_countreis()
             cities = City.get_all_cities()
                 
             data['countries'] = countries

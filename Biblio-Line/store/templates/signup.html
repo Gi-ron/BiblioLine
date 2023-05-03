@@ -61,9 +61,8 @@
                 <div class="form-group" style="margin-top: 2rem; ">
                     <label for=""> Country </label>
                     <select  style="width: 8rem;" name = 'country'>
-                        <option> -- select --</option>
                         {% for country in countries %}
-                        <option value="{value.country.name}" >
+                        <option>
                             <a href="/?country={{country.id}}"
                             class="list-group-item list-group-item-action btn btn-outline-success ">{{country.name}}</a> 
                         </option>
