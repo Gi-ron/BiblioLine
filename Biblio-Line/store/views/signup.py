@@ -30,7 +30,6 @@ class Signup (View):
         date = postData.get('date')
         address = postData.get('address')
         country = postData.get('country')
-        print(country)
         
         
         # validation

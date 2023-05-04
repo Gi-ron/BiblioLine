@@ -10,7 +10,6 @@ import string
 class Account (View):
     def get(self, request):
         id = request.session.get('customer')
-        print(id)
 
         customer = Customer.get_customer_by_id(id)
 
