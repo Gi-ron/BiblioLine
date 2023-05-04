@@ -7,7 +7,6 @@ from django.contrib.auth.forms import PasswordChangeForm
 
 class ChangePassword(View):
     def get(self, request):
-        accept = True
         return render(request, "change_password.html")
     
     @login_required
