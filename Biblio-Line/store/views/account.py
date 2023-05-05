@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from geonamescache import GeonamesCache
 from django.contrib.auth.hashers import make_password
 from store.models.customer import Customer
 from django.views import View
@@ -12,6 +13,9 @@ class Account (View):
         id = request.session.get('customer')
 
         customer = Customer.get_customer_by_id(id)
+        g_c = GeonamesCache()
+        #get country list
+        countries = g_c.get_countries()
 
         data = {
             'first_name': customer.first_name,

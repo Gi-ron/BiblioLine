@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'geonamescache',
     'store'
 ]
 
@@ -79,9 +80,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bibliolinedb',
-        'USER': 'root',
-        'PASSWORD': '1200',
-        'HOST': 'localhost',
+        'USER': 'Desarrollo',
+        'PASSWORD': 'Orion321*',
+        'HOST': '192.168.0.252',
         'PORT': '3306',
     }
 }

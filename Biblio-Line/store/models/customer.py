@@ -7,8 +7,9 @@ class Customer(models.Model):
     email=models.EmailField()
     password = models.CharField(max_length=100)
     date = models.DateField()
-    address = models.CharField(max_length=250) 
-    country = models.CharField(max_length=100)
+    address = models.CharField(max_length=250)
+    country = models.CharField(max_length=250)
+    city = models.IntegerField(default=0)
 
     #to save the data
     def register(self):
