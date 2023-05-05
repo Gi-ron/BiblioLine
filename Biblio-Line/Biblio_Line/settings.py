@@ -80,9 +80,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bibliolinedb',
-        'USER': 'Desarrollo',
-        'PASSWORD': 'Orion321*',
-        'HOST': '192.168.0.252',
+        'USER': 'root',
+        'PASSWORD': '1200',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }

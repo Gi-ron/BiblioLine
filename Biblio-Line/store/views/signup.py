@@ -28,6 +28,8 @@ class Signup(View):
         address = post_data.get('address')
         country_id = post_data.get('country')
         city_id = post_data.get('city')
+        print(country_id)
+        print(city_id)
 
         # validation
         value = {
