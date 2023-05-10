@@ -69,9 +69,9 @@ class Signup(View):
                 'values': value
             }
 
-            # g_c = GeonamesCache()
-            # countries = g_c.get_countries()
-            # data['countries'] = countries
+            g_c = GeonamesCache()
+            countries = g_c.get_countries()
+            data['countries'] = countries
 
             return render (request, 'signup.html', data)
 
