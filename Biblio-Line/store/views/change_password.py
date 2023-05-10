@@ -1,19 +1,19 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.hashers import make_password, check_password
-from store.models.customer import Customer
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.views import  View
-from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
+'''Module for managment password'''
 import string
+from django.shortcuts import render
+from django.contrib.auth.hashers import make_password, check_password
+from django.views import  View
+from store.models.customer import Customer
+
 
 class ChangePassword(View):
+    '''change pass view'''
     def get(self, request):
+        '''get the view for change password'''
         return render(request, "change_password.html")
-    
- 
+
     def post(self, request):
+        '''confirm change password data'''
         postData = request.POST
         old_password = postData.get('old_password')
         new_password = postData.get('new_password')
@@ -35,7 +35,6 @@ class ChangePassword(View):
                 new_password = make_password (new_password)
                 customer.change_password(new_password)
 
-                
                 return render(request, 'change_password.html', {'good': 'The password was changed successfully'})
             else:
                 data = {
@@ -50,10 +49,8 @@ class ChangePassword(View):
             }
             return render (request, 'change_password.html', data)
 
-
-
-    
     def validateCustomer(self, new, confirm):
+        '''validate customer account'''
         error_message = None
         if len (new) < 7:
             error_message = 'Password must be 7 char long'
@@ -65,20 +62,5 @@ class ChangePassword(View):
             error_message = 'Password requires a special character' 
         elif new != confirm:
             error_message  = 'The passwords do not match'
-        
         # saving
-
         return error_message
-    
-        # # if request.method == 'POST':
-        # #     form = PasswordChangeForm(request.user, request.POST)
-        # #     if form.is_valid():
-        # #         user = form.save()
-        # #         update_session_auth_hash(request, user)
-        # #         messages.success(request, 'Tu contraseña se actualizó correctamente')
-        # #         return redirect('homepage')
-        # #     else:
-        # #         messages.error(request, 'Asegurese de corregir los errores antes de enviar la información.')
-        # # else:
-        # #     form = PasswordChangeForm(request.user)
-        # # return render(request, 'change_password.html', {'form': form})

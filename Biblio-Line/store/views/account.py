@@ -1,15 +1,14 @@
-from django.shortcuts import render, redirect
-from geonamescache import GeonamesCache
-from django.contrib.auth.hashers import make_password
-from store.models.customer import Customer
-from django.views import View
-from store.models.country import Country
-from store.models.city import  City
+'''Module for the customer account'''
 import string
-
+from geonamescache import GeonamesCache
+from store.models.customer import Customer
+from django.shortcuts import render, redirect
+from django.views import View
 
 class Account (View):
+    '''view class for the account service'''
     def get(self, request):
+        '''get function for bring the account data'''
         id = request.session.get('customer')
 
         customer = Customer.get_customer_by_id(id)
@@ -30,6 +29,7 @@ class Account (View):
         return render (request, 'account.html', data)
 
     def post(self, request):
+        '''post function for manipulate account data'''
         postData = request.POST
         first_name = postData.get ('firstname')
         last_name = postData.get ('lastname')
@@ -54,10 +54,10 @@ class Account (View):
 
         return redirect('homepage')
 
-
     def validateCustomer(self, customer, confirm):
+        '''validate if a customer exists or not'''
         error_message = None
-        if (not customer.first_name):
+        if not customer.first_name:
             error_message = "Please Enter your First Name !!"
         elif len (customer.first_name) < 3:
             error_message = 'First Name must be 3 char long or more'

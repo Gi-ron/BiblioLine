@@ -1,14 +1,14 @@
+'''Module for the home page'''
 from django.shortcuts import render , redirect , HttpResponseRedirect
+from django.views import View
 from store.models.product import Products
 from store.models.category import Category
 
-from django.views import View
 
-
-# Create your views here.
 class Index(View):
-
+    '''Main page class'''
     def post(self , request):
+        '''Render all view for homepage'''
         product = request.POST.get('product')
         remove = request.POST.get('remove')
         cart = request.session.get('cart')
@@ -33,13 +33,13 @@ class Index(View):
         print('cart' , request.session['cart'])
         return redirect('homepage')
 
-
-
     def get(self , request):
+        '''get store'''
         # print()
         return HttpResponseRedirect(f'/store{request.get_full_path()[1:]}')
 
 def store(request):
+    '''store method'''
     cart = request.session.get('cart')
     if not cart:
         request.session['cart'] = {}
@@ -49,16 +49,11 @@ def store(request):
     if categoryID:
         products = Products.get_all_products_by_categoryid(categoryID)
     else:
-        products = Products.get_all_products();
+        products = Products.get_all_products()
 
-   
-  
     data = {}
     data['products'] = products
     data['categories'] = categories
 
-
     print('you are : ', request.session.get('email'))
     return render(request, 'index.html', data)
-
-
