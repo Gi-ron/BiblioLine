@@ -31,7 +31,8 @@ class Migration(migrations.Migration):
                 ('password', models.CharField(max_length=100)),
                 ('date', models.DateField() ),
                 ('address', models.CharField(max_length=250)),
-                ('country', models.CharField(max_length=100))
+                ('country', models.CharField(max_length=100)),
+                ('description', models.CharField(max_length=250))
             ],
         ),
         migrations.CreateModel(
@@ -78,10 +79,11 @@ class Migration(migrations.Migration):
             name='city',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('idcountry', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='store.country')),
+                ('idcountry', models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, to='store.country')),
                 ('name', models.CharField(max_length=150)),
             ],
         ),
+        
 
 
     ]

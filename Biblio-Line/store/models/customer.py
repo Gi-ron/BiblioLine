@@ -10,6 +10,7 @@ class Customer(models.Model):
     address = models.CharField(max_length=250)
     country = models.CharField(max_length=250)
     city = models.IntegerField(default=0)
+    description = models.CharField(max_length=250)
 
     #to save the data
     def register(self):
@@ -21,6 +22,7 @@ class Customer(models.Model):
         self.phone = data[2]
         self.email = data[3]
         self.address = data[4]
+        self.description = data[5]
         self.save()
 
     def change_password(self, new_password):

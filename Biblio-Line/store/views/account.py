@@ -23,7 +23,8 @@ class Account (View):
             'email': customer.email,
             'date' : customer.date,
             'address': customer.address,
-            'country':customer.country
+            'country':customer.country,
+            'description' : customer.description
         }
 
         return render (request, 'account.html', data)
@@ -35,7 +36,7 @@ class Account (View):
         last_name = postData.get ('lastname')
         phone = postData.get ('phone')
         email = postData.get ('email')
-        date = postData.get('date')
+        description = postData.get('description')
         address = postData.get('address')
 
                 # validation
@@ -45,6 +46,7 @@ class Account (View):
             phone,
             email,
             address,
+            description
         )
 
         id = request.session.get('customer')
