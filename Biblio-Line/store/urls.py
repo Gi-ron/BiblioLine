@@ -9,6 +9,7 @@ from .views.checkout import CheckOut
 from .views.orders import OrderView
 from .views.change_password import ChangePassword
 from .views.account import Account
+from .views.root import RootView
 from .middlewares.auth import  auth_middleware
 
 
@@ -19,6 +20,7 @@ urlpatterns = [
 
     path('signup', Signup.as_view(), name='signup'),
     path('login', Login.as_view(), name='login'),
+    path('root', RootView.as_view(), name='root'),
     path('logout', logout , name='logout'),
     path('account', Account.as_view(), name = 'account'),
     path('change_password', ChangePassword.as_view(), name = "change_password"),
