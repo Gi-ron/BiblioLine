@@ -67,22 +67,7 @@ class Migration(migrations.Migration):
                 ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='store.products')),
             ],
         ),
-        migrations.CreateModel(
-            name='country',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=150)),
-            ],
-        ),
 
-        migrations.CreateModel(
-            name='city',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('idcountry', models.ForeignKey(default=1, on_delete=django.db.models.deletion.DO_NOTHING, to='store.country')),
-                ('name', models.CharField(max_length=150)),
-            ],
-        ),
         
 
 

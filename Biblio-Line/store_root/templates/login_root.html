@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 
 
 {% block content %}
@@ -10,8 +10,8 @@
                 <!--AGREGAR IMAGEN AQUI-->
             <hr>
             </div>
-            <h3 class="alert alert-light rounded-pill" style="text-align:center" >Create Admin</h3>
-            <form action="" method="POST">
+            <h3 class="alert alert-light rounded-pill" style="text-align:center" >Login</h3>
+            <form action="/root" method="POST">
                 
                 {% csrf_token %}
 
@@ -28,20 +28,12 @@
                     class=" form-control-sm form-control" placeholder="abc@gmail.com">
                 </div>
 
-                <!-- DNI -->
-                <div class="form-group">
-                    <label for="">DNI</label>
-                    <input type="text"
-                    name="dni" 
-                    id=""
-                     class="form-control form-control-sm" >
-                </div>
 
-                <!-- Name -->
+                <!-- password -->
                 <div class="form-group">
-                    <label for="">User name</label>
-                    <input type="text" 
-                    name="name" 
+                    <label for="">Password</label>
+                    <input type="password" 
+                    name="password" 
                     id=""
                      class="form-control form-control-sm" >
                 </div>

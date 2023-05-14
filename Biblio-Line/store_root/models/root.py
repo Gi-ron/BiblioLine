@@ -14,7 +14,7 @@ class Root(models.Model):
     #to save the data
     def register(self):
         self.save()
-        self.send_email()
+        #self.send_email()
        
     def send_email(self):
         asunto = 'Ha sido registrado en Biblio Line'

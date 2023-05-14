@@ -2,11 +2,11 @@ from django.shortcuts import render , redirect , HttpResponseRedirect
 from django.contrib.auth.hashers import  check_password
 from store.models.customer import Customer
 from django.views import View
-from store.models.root import Root
+from store_root.models.root import Root
 from django.contrib.auth.hashers import make_password
 
 
-class RootView(View):
+class AddAdministrator(View):
 
     def get(self, request):
         
