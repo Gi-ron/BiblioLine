@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- Host:                         192.168.0.252
--- Versión del servidor:         8.0.24 - MySQL Community Server - GPL
+-- Host:                         127.0.0.1
+-- Versión del servidor:         8.0.33 - MySQL Community Server - GPL
 -- SO del servidor:              Win64
--- HeidiSQL Versión:             12.0.0.6468
+-- HeidiSQL Versión:             12.4.0.6659
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -110,21 +110,23 @@ CREATE TABLE IF NOT EXISTS `auth_user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `password` varchar(128) NOT NULL,
   `last_login` datetime(6) DEFAULT NULL,
-  `is_superuser` tinyint(1) NOT NULL,
+  `is_superuser` tinyint(1) NOT NULL DEFAULT '0',
   `username` varchar(150) NOT NULL,
-  `first_name` varchar(150) NOT NULL,
-  `last_name` varchar(150) NOT NULL,
+  `first_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `last_name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `email` varchar(254) NOT NULL,
-  `is_staff` tinyint(1) NOT NULL,
-  `is_active` tinyint(1) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL DEFAULT '1',
+  `is_active` tinyint(1) NOT NULL DEFAULT '1',
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bibliolinedb.auth_user: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla bibliolinedb.auth_user: ~3 rows (aproximadamente)
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-	(3, 'pbkdf2_sha256$600000$O7xFyTX4nqkXHvGRs9gX27$jkWaDQ8vUq3OA62SycHlhfyS+lEi+JiPnjIlyJ79Hao=', '2023-05-03 15:51:50.389524', 1, 'admin', '', '', '', 1, 1, '2023-04-28 23:08:21.000000');
+	(3, 'pbkdf2_sha256$600000$O7xFyTX4nqkXHvGRs9gX27$jkWaDQ8vUq3OA62SycHlhfyS+lEi+JiPnjIlyJ79Hao=', '2023-05-14 21:58:28.761937', 1, 'admin', '', '', '', 1, 1, '2023-04-28 23:08:21.000000'),
+	(5, 'pbkdf2_sha256$600000$7pcZpKktMViATkfuCijxuB$gUwhB49SIda/ErWHFKT+WfkkwVwKaiX/L8d9kft8COg=', '2023-05-14 21:59:28.844916', 0, 'Andres001', '', '', '', 1, 1, '2023-05-14 21:53:01.000000'),
+	(6, 'pbkdf2_sha256$600000$Pt4NX0diQK4uXelnTNrRca$Vmwz8BPuJ5nEz4Wz/Tu94UEnCSNGpl2GplCqNTO9l0U=', NULL, 0, 'Andres268', NULL, NULL, 'moni_m18@hotmail.com', 1, 1, '2023-05-14 22:57:39.979904');
 
 -- Volcando estructura para tabla bibliolinedb.auth_user_groups
 CREATE TABLE IF NOT EXISTS `auth_user_groups` (
@@ -150,9 +152,34 @@ CREATE TABLE IF NOT EXISTS `auth_user_user_permissions` (
   KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`),
   CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla bibliolinedb.auth_user_user_permissions: ~0 rows (aproximadamente)
+INSERT INTO `auth_user_user_permissions` (`id`, `user_id`, `permission_id`) VALUES
+	(14, 5, 25),
+	(15, 5, 26),
+	(16, 5, 27),
+	(17, 5, 28),
+	(18, 5, 29),
+	(19, 5, 30),
+	(20, 5, 31),
+	(21, 5, 32),
+	(22, 5, 33),
+	(23, 5, 34),
+	(24, 5, 35),
+	(25, 5, 36),
+	(26, 5, 37),
+	(27, 5, 38),
+	(28, 5, 39),
+	(29, 5, 40),
+	(30, 5, 41),
+	(31, 5, 42),
+	(32, 5, 43),
+	(33, 5, 44),
+	(34, 5, 45),
+	(35, 5, 46),
+	(36, 5, 47),
+	(37, 5, 48);
 
 -- Volcando estructura para tabla bibliolinedb.django_admin_log
 CREATE TABLE IF NOT EXISTS `django_admin_log` (
@@ -170,11 +197,17 @@ CREATE TABLE IF NOT EXISTS `django_admin_log` (
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
   CONSTRAINT `django_admin_log_chk_1` CHECK ((`action_flag` >= 0))
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla bibliolinedb.django_admin_log: ~0 rows (aproximadamente)
 INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`, `action_flag`, `change_message`, `content_type_id`, `user_id`) VALUES
-	(6, '2023-04-28 23:10:31.798609', '1', 'tanushree7252@gmail.com', 3, '', 4, 3);
+	(6, '2023-04-28 23:10:31.798609', '1', 'tanushree7252@gmail.com', 3, '', 4, 3),
+	(8, '2023-05-14 21:53:01.513396', '5', 'Andres001', 1, '[{"added": {}}]', 4, 3),
+	(9, '2023-05-14 21:53:11.557582', '5', 'Andres001', 2, '[{"changed": {"fields": ["User permissions"]}}]', 4, 3),
+	(10, '2023-05-14 21:56:31.187377', '5', 'Andres001', 2, '[{"changed": {"fields": ["User permissions"]}}]', 4, 3),
+	(11, '2023-05-14 21:57:01.817145', '5', 'Andres001', 2, '[{"changed": {"fields": ["Staff status", "Superuser status", "User permissions"]}}]', 4, 3),
+	(12, '2023-05-14 21:57:38.838946', '5', 'Andres001', 2, '[{"changed": {"fields": ["Superuser status"]}}]', 4, 5),
+	(13, '2023-05-14 21:59:11.885521', '5', 'Andres001', 2, '[{"changed": {"fields": ["User permissions"]}}]', 4, 3);
 
 -- Volcando estructura para tabla bibliolinedb.django_content_type
 CREATE TABLE IF NOT EXISTS `django_content_type` (
@@ -209,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `django_migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bibliolinedb.django_migrations: ~20 rows (aproximadamente)
+-- Volcando datos para la tabla bibliolinedb.django_migrations: ~21 rows (aproximadamente)
 INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 	(1, 'contenttypes', '0001_initial', '2023-05-03 14:50:34.860219'),
 	(2, 'auth', '0001_initial', '2023-05-03 14:50:35.894145'),
@@ -242,8 +275,9 @@ CREATE TABLE IF NOT EXISTS `django_session` (
   KEY `django_session_expire_date_a5c62663` (`expire_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bibliolinedb.django_session: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla bibliolinedb.django_session: ~4 rows (aproximadamente)
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+	('49xhwhj9pzucqzut7me8loc5a2t8u6yl', 'eyJjYXJ0Ijp7Im51bGwiOjEsIm51bGwiOjF9fQ:1pyKbW:psBEJaPme3w8pent5Hui5vWPFues1JaW2P_a8T6QzLk', '2023-05-28 22:54:14.171484'),
 	('a6g0lr0d2dsgpmc4ont8odrtwyrkyvla', 'eyJjYXJ0Ijp7fSwiY3VzdG9tZXIiOjE1fQ:1pux7x:00El3sqxhhSfyX2i9PQQUay-yoagnR_LkJGqOwM91Qc', '2023-05-19 15:13:45.409983'),
 	('eqmnbiwm8jrui9df7nioc7k0lnp095yh', 'eyJjYXJ0Ijp7fX0:1puwUD:V7SkD2OiEVaiaIxmVdTvGaOnXiP-bAu41WmcZ8FxArs', '2023-05-19 14:32:41.607793'),
 	('h5ci6iow316poy437yaeuq2p2qpcdeyz', 'e30:1puFfS:FFsMt1pdGknVoTEnAN3bVxTq2WxdzGJB8yGB5UWBqd8', '2023-05-17 16:49:26.814044');
@@ -257,9 +291,9 @@ CREATE TABLE IF NOT EXISTS `store_category` (
 
 -- Volcando datos para la tabla bibliolinedb.store_category: ~3 rows (aproximadamente)
 INSERT INTO `store_category` (`id`, `name`) VALUES
-	(1, 'Miedo'),
+	(1, 'Horror'),
 	(2, 'Drama'),
-	(3, 'Filosofia');
+	(3, 'Mystery');
 
 -- Volcando estructura para tabla bibliolinedb.store_city
 CREATE TABLE IF NOT EXISTS `store_city` (
@@ -2702,15 +2736,17 @@ CREATE TABLE IF NOT EXISTS `store_customer` (
   `address` varchar(250) NOT NULL,
   `country` varchar(250) NOT NULL,
   `city` int NOT NULL,
+  `description` varchar(250) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla bibliolinedb.store_customer: ~3 rows (aproximadamente)
-INSERT INTO `store_customer` (`id`, `first_name`, `last_name`, `phone`, `email`, `password`, `date`, `address`, `country`, `city`) VALUES
-	(13, 'Andres Felipe', 'Quebrada Agudelo', '3125552233', 'moni_m18@hotmail.com', 'pbkdf2_sha256$600000$UXUkWY0a338Jc6eH4zXvbT$s5ZBw2sAvBs+A7Y7Ve7tsxizwSdN2BtX6qskpo+XUBo=', '2023-04-19', 'Mz 17 Cs 208 Leningrado 2', '{value.country.name}', 0),
-	(14, 'DIego', 'Salinas', '3142108123', 'salinas@gmail.com', 'pbkdf2_sha256$600000$t6oT5N9WkNSrdcCJPVDO9o$DWx2PJbdn8n2Hqdl2c3DF8Or+g5Z+c7Bai9W3uRrIi4=', '2023-05-28', 'mmm', 'Colombia', 0),
-	(15, 'Steven', 'Giron', '3218063533', 'steven@gmail.com', 'pbkdf2_sha256$600000$aL5z7RGMjc5uBXiaWutL1U$aYjFF73KKDVZ3S6+16ytk8fhUHkw0hJhBTj2h+x51LM=', '1996-09-23', 'steven@gmail.com', 'Anonymous Proxy', 0),
-	(16, 'prueba', 'pedro', '3218063635', 'pedro@gmail.com', 'pbkdf2_sha256$600000$rBuDjRAJxhpcjZ4NrHibbT$+R30/HDQyy7GNLB2lUUrrAvCCBLY6ybYYM+inElkWEE=', '2023-05-05', 'aqui', 'CO', 3665973);
+-- Volcando datos para la tabla bibliolinedb.store_customer: ~4 rows (aproximadamente)
+INSERT INTO `store_customer` (`id`, `first_name`, `last_name`, `phone`, `email`, `password`, `date`, `address`, `country`, `city`, `description`) VALUES
+	(13, 'Andres Felipe', 'Quebrada Agudelo', '3125552233', 'moni_m18@hotmail.com', 'pbkdf2_sha256$600000$UXUkWY0a338Jc6eH4zXvbT$s5ZBw2sAvBs+A7Y7Ve7tsxizwSdN2BtX6qskpo+XUBo=', '2023-04-19', 'Mz 17 Cs 208 Leningrado 2', '{value.country.name}', 0, NULL),
+	(14, 'DIego', 'Salinas', '3142108123', 'salinas@gmail.com', 'pbkdf2_sha256$600000$t6oT5N9WkNSrdcCJPVDO9o$DWx2PJbdn8n2Hqdl2c3DF8Or+g5Z+c7Bai9W3uRrIi4=', '2023-05-28', 'mmm', 'Colombia', 0, NULL),
+	(15, 'Steven', 'Giron', '3218063533', 'steven@gmail.com', 'pbkdf2_sha256$600000$aL5z7RGMjc5uBXiaWutL1U$aYjFF73KKDVZ3S6+16ytk8fhUHkw0hJhBTj2h+x51LM=', '1996-09-23', 'steven@gmail.com', 'Anonymous Proxy', 0, NULL),
+	(16, 'prueba', 'pedro', '3218063635', 'pedro@gmail.com', 'pbkdf2_sha256$600000$rBuDjRAJxhpcjZ4NrHibbT$+R30/HDQyy7GNLB2lUUrrAvCCBLY6ybYYM+inElkWEE=', '2023-05-05', 'aqui', 'CO', 3665973, NULL),
+	(17, 'Andres Felipe', 'Quebrada Agudelo', '3125552233', 'utp@gmail.com', 'pbkdf2_sha256$600000$m94AgQ8nZZ6160Ykv1x2Yg$culyfvJQAssva0yD5H0Q4xVr5cptmhAcPEOZDfMyUoc=', '2023-05-03', 'Mz 17 Cs 208 Leningrado 2', 'CO', 3672486, 'I like books');
 
 -- Volcando estructura para tabla bibliolinedb.store_order
 CREATE TABLE IF NOT EXISTS `store_order` (

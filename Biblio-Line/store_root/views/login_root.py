@@ -12,7 +12,7 @@ class LoginRoot(View):
         return render (request, 'login_root.html')
 
     def post(self, request):
-        email = request.POST.get ('email')
+        username = request.POST.get ('username')
         password = request.POST.get ('password')
         
         return render(request, 'root.html')

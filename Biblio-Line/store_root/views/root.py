@@ -15,7 +15,7 @@ class AddAdministrator(View):
     def post(self, request):
         email = request.POST.get ('email')
         password = request.POST.get ('dni')
-        username = request.POST.get ('name')
+        username = request.POST.get ('username')
         
         root = Root(email=email,
                     password=password,
@@ -23,7 +23,7 @@ class AddAdministrator(View):
         root.password = make_password(root.password)
         
         root.register()
-        return redirect('homepage')
+        return render(request, 'root.html')
         
          
         

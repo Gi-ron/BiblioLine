@@ -11,11 +11,11 @@
 		<div class="col-lg-3 mx-auto">
 			<div class="list-group" style="margin-bottom: 2rem;">
 
-				<a style="background-color: #0F1C25; color: white;" href="/account" class="list-group-item list-group-item-action btn btn-outline-success">Account</a>
+				<a style="background-color: #0F1C25; color: white;" href="/root1" class="list-group-item list-group-item-action btn btn-outline-success">Create Admin</a>
 
-                <a href="/change_password" class="list-group-item list-group-item-action btn btn-outline-success ">Password</a>
+                <a href="/root_password" class="list-group-item list-group-item-action btn btn-outline-success ">Password</a>
 
-                <a href="/change_password" class="list-group-item list-group-item-action btn btn-outline-success "> Cards</a>
+            
 
 			</div>
 		</div>
@@ -26,8 +26,8 @@
             <!-- <hr> -->
             <hr>
             </div>
-            <h3 class="alert alert-success rounded-pill" style="text-align:center">Account</h3>
-            <form action="/account" method="POST">
+            <h3 class="alert alert-success rounded-pill" style="text-align:center">Create Admin</h3>
+            <form action="/root1" method="POST">
                 
                 {% csrf_token %}
 
@@ -41,29 +41,12 @@
 
                 <!-- firstname -->
                 <div class="form-group">
-                    <label for="">First Name</label>
-                    <input type="text" name="firstname"
+                    <label for="">Admin name</label>
+                    <input type="text" name="username"
                      id="" value="{{first_name}}" class="form-control form-control-sm" 
                      placeholder="">
                 </div>
 
-                <!-- last name -->
-                <div class="form-group">
-                    <label for="">Last Name</label>
-                    <input type="text" name="lastname" 
-                    id="" value="{{last_name}}" class="form-control form-control-sm"
-                    >
-                </div>
-
-                <!-- phone -->
-                <div class="form-group">
-                    <label for="">Phone</label>
-                    <input type="text" name="phone" 
-                    id="" class="form-control form-control-sm"
-                    value="{{phone}}"
-                    placeholder="XXXXXXXXXX"
-                    >
-                </div>
                 <!-- email -->
                 <div class="form-group">
                     <label for="">Email</label>
@@ -73,19 +56,11 @@
                 </div>
 
 
-                <!-- address -->
-                <div class="form-group">
-                    <label for="">Address</label>
-                    <input required type="text" name="address" id=""
-                    class=" form-control-sm form-control" placeholder="" value="{{address}}">
-                </div>
-
-
                 <!-- Description -->
                 <div class="form-group">
-                    <label for="">Description</label>
+                    <label for="">DNI</label>
                     <input type="text"
-                    name="description"
+                    name="dni"
                     id=""
                      class="form-control form-control-sm"
                      value="{{description}}">
