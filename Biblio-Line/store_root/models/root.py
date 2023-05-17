@@ -1,11 +1,10 @@
 from django.db import models
-from django.core.mail import EmailMessage
+from django.core.mail import send_mail
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import Group, User
-from email.mime.text import MIMEText
 
 class Root(models.Model):
     email = models.CharField(max_length=254)
@@ -19,30 +18,20 @@ class Root(models.Model):
         group = Group.objects.get(name = 'Administrador')
         user = User.objects.get(username = self.username)
         group.user_set.add(user)
-        #self.send_email()
+        self.send_email()
        
     def send_email(self):
         # Dirección de correo electrónico del destinatario
-        destinatario = self.email
+        addessee = self.email
 
         # Asunto del correo electrónico
-        asunto = 'Bienvenido a nuestra plataforma'
+        subject = 'Bienvenido a nuestra plataforma'
 
         # Contenido del correo electrónico
-        mensaje = 'Hola {},\n\nBienvenido a nuestra plataforma. Gracias por registrarte.'.format(self.username)
+        message = 'Hola {},\n\nBienvenido a nuestra plataforma. !Gracias por registrarte!. \n Se ha creado una contraseña temporal con su DNI \n!Favor Cambiala¡'.format(self.username)
 
-        # Configurar el mensaje como MIMEText y especificar la codificación UTF-8
-        mensaje_mime = MIMEText(mensaje, _charset='utf-8')
-
-        # Crear un objeto EmailMessage y configurar los campos
-        email = EmailMessage(asunto, mensaje_mime.as_string(), settings.EMAIL_HOST_USER, [destinatario])
-        email.content_subtype = 'html'  # Opcional, si el contenido es HTML
-
-        # Establecer la codificación UTF-8 para el correo electrónico
-        email.encoding = 'utf-8'
-
-        # Envía el correo electrónico
-        email.send()
+        # Envía el correo electrónico y especifica el encoding en el message
+        send_mail(subject, message, settings.EMAIL_HOST_USER,   [addessee])
 
     class Meta:
         db_table = 'auth_user'

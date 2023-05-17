@@ -30,10 +30,10 @@ ALLOWED_HOSTS = [
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'tu_direccion_de_correo@gmail.com'
-EMAIL_HOST_PASSWORD = 'tu_contraseña'
+EMAIL_HOST_USER = 'biblioline3@gmail.com'
+EMAIL_HOST_PASSWORD = 'wvhtifmoolqxmzfg'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'tu_direccion_de_correo@gmail.com'
+DEFAULT_FROM_EMAIL = 'biblioline3@gmail.com'
 
 # Application definition
 

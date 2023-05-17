@@ -3,6 +3,7 @@ from .models.product import Products
 from .models.category import Category
 from .models.customer import Customer
 from .models.orders import Order
+from .models.news import News
 
 
 class AdminProduct(admin.ModelAdmin):
@@ -19,6 +20,7 @@ admin.site.register(Products, AdminProduct)
 admin.site.register(Category)
 admin.site.register(Customer)
 admin.site.register(Order)
+admin.site.register(News)
 
 
 # username = admin  password = biblioline001
