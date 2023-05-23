@@ -9,6 +9,7 @@ from .views.checkout import CheckOut
 from .views.orders import OrderView
 from .views.change_password import ChangePassword
 from .views.account import Account
+from .views.news import News
 
 from .middlewares.auth import  auth_middleware
 
@@ -26,5 +27,5 @@ urlpatterns = [
     path('check-out', CheckOut.as_view() , name='checkout'),
     path('orders', auth_middleware(OrderView.as_view()), name='orders'),
     path('get_cities_by_country/<str:country_code>/', CitiesByCountry.get_cities_by_country, name='get_cities_by_country'),
-
+    path('news', News.as_view(), name = 'news'),
 ]

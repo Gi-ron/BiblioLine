@@ -46,8 +46,12 @@ def store(request):
     products = None
     categories = Category.get_all_categories()
     categoryID = request.GET.get('category')
+    author = request.GET.get('author')
+    
     if categoryID:
         products = Products.get_all_products_by_categoryid(categoryID)
+    elif author:
+        products = Products.objects.filter(author__icontains=author)
     else:
         products = Products.get_all_products()
 

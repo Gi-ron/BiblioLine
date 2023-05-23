@@ -8,42 +8,44 @@
 <div class="container-fluid mt-3">
 	<div class="row">
 
-
 		<!-- filter -->
+		<div class="col-lg-2 col-xl-2 col-md-2 col-sm-12 mx-auto">
+			<div class="list-group">
 
-		<div class="col-lg-3 mx-auto">
-			<div class="list-group" style="margin-bottom: 5rem;">
-
-				<a style="background-color: #0F1C25; color: white;" href="/" class="list-group-item list-group-item-action btn btn-outline-success">All Categories</a>
+				<a href="/" class="list-group-item list-group-item-action list-group-item-dark active"><i class="fas fa-circle"></i> All categories</a>
 
 				{% for category in categories %}
 				<a href="/?category={{category.id}}"
-					class="list-group-item list-group-item-action btn btn-outline-success ">{{category.name}}</a>
+					class="list-group-item list-group-item-action list-group-item-secondary active"><i class="fas fa-circle"></i> {{category.name}}</a>
 				{% endfor %}
 			</div>
 
-			<div class="list-group" style="margin-bottom: 5rem;">
+			<hr class="my-4 bg-gradient-dark">
 
-				<a style="border-color: #F4FF57; color: black;" href="/" class="list-group-item list-group-item-action btn btn-outline-success">News</a>
-			</div>
+			{% if request.session.customer %}
+				<div class="list-group" style="margin-bottom: 5rem;">
+					<a href="/news" class="list-group-item list-group-item-action list-group-item-light active" style="color: white"
+					><i class="fas fa-newspaper"></i> News<span class="badge badge-success navbar-badge"><i class="fas fa-search-plus"></i></span></a>
+				</div>
+			{% endif %}
+
 		</div>
 
-		
-
 		<!-- all products -->
-		<div id='products' class="col-lg-9 mx-auto">
+		<div id='products' class="col-lg-10 col-xl-10 col-md-10 col-sm-12 mx-auto">
 			<div class="row mx-auto">
 				{% for product in products %}
-				<div class="card mx-auto mb-3" id={{product.id}} style="width: 12rem; text-align: center;">
-					<img class="card-img-top" src="{{product.image.url}}" alt="Card image cap" style="height: 60%;">
+				<div class="card mx-auto mb-3" id={{product.id}} style="width: 14rem; text-align: left;">
+					<img class="card-img-top img-fluid" src="{{product.image.url}}" alt="Card image cap" style="height: 60%;">
 					<div class="card-body">
-						<p class="card-title">{{product.name}}</p>
-						<p class="card-text"><b>{{product.price|currency}}</b></p>
-						<!-- {{product | is_in_cart:request.session.cart }} -->
+						<ul class="list-unstyled">
+							<li><strong>{{product.name}}</strong></li>
+							<li class="text-muted"><strong>{{product.author}}</strong></li>
+							<li style="color: #e6e600">{{product.price|currency}}</li>
+						  </ul>
 					</div>
 
 					<div class="card-footer p-0 no-gutters">
-
 						{% if product|is_in_cart:request.session.cart %}
 						<div class="row no-gutters">
 							<form action="/#{{product.id}}" class="col-2 " method="post">
@@ -63,13 +65,12 @@
 						<form action="/#{{product.id}}" method="POST" class="btn-block">
 							{% csrf_token %}
 							<input hidden type="text" name='product' value='{{product.id}}'>
-							<input type="submit" class="float-right btn btn-success form-control"
+							<input type="submit" class="float-right btn bg-gradient-info form-control"
 								value="Add To Cart">
 						</form>
 						{% endif %}
 
 					</div>
-
 				</div>
 				{% endfor %}
 			</div>
