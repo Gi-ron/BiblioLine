@@ -32,6 +32,18 @@ class Root(models.Model):
 
         # Envía el correo electrónico y especifica el encoding en el message
         send_mail(subject, message, settings.EMAIL_HOST_USER,   [addessee])
+    
+    def change_password(self, new_password):
+        self.password = new_password
+        self.save()
+
+    @staticmethod
+    def get_root():
+        try:
+            return Root.objects.get(username = 'root')
+        except:
+            return False
+
 
     class Meta:
         db_table = 'auth_user'

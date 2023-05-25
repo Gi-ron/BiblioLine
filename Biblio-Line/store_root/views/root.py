@@ -9,7 +9,7 @@ from django.contrib.auth.hashers import make_password
 class AddAdministrator(View):
 
     def get(self, request):
-        
+          
         return render (request, 'root.html')
     
     def post(self, request):
@@ -20,11 +20,16 @@ class AddAdministrator(View):
         root = Root(email=email,
                     password=password,
                     username=username)
+        
         root.password = make_password(root.password)
+
         
         root.register()
         return render(request, 'root.html')
-        
+
+def logout_root(request):
+    request.session.clear()
+    return redirect('login')     
          
         
         

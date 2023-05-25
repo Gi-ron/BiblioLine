@@ -1,6 +1,6 @@
 from django.shortcuts import render , redirect , HttpResponseRedirect
 from django.contrib.auth.hashers import  check_password
-from store.models.customer import Customer
+from store_root.models.root import Root
 from django.views import View
 
 
@@ -14,9 +14,13 @@ class LoginRoot(View):
     def post(self, request):
         username = request.POST.get ('username')
         password = request.POST.get ('password')
-        
-        return render(request, 'root.html')
 
-def logout(request):
+        root_password = Root.get_root()
+        if password == root_password.password and username == 'root':
+            return render(request, 'root.html')
+        else:
+            return render(request, 'login_root.html', {'error' : "Invalid"})
+
+def logout_root(request):
     request.session.clear()
-    return redirect('login')
+    return redirect('login_root')
