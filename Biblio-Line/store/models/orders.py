@@ -15,6 +15,8 @@ class Order(models.Model):
     phone = models.CharField (max_length=50, default='', blank=True)
     date = models.DateField (default=datetime.datetime.today)
     status = models.BooleanField (default=False)
+    pick = models.CharField(max_length=5)
+
 
     def placeOrder(self):
         self.save()

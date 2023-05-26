@@ -11,6 +11,7 @@ class Customer(models.Model):
     country = models.CharField(max_length=250)
     city = models.IntegerField(default=0)
     description = models.CharField(max_length=250)
+    is_subscribed = models.IntegerField(default=0)
 
     #to save the data
     def register(self):
@@ -27,6 +28,10 @@ class Customer(models.Model):
 
     def change_password(self, new_password):
         self.password = new_password
+        self.save()
+
+    def tosubscribe(self):
+        self.is_subscribed = 1
         self.save()
 
     @staticmethod

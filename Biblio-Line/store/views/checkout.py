@@ -12,6 +12,9 @@ class CheckOut(View):
         phone = request.POST.get('phone')
         customer = request.session.get('customer')
         cart = request.session.get('cart')
+        check = request.POST.get('check')
+
+        print(f" check -->{check}")
         products = Products.get_products_by_id(list(cart.keys()))
         print(address, phone, customer, cart, products)
 
@@ -22,7 +25,9 @@ class CheckOut(View):
                           price=product.price,
                           address=address,
                           phone=phone,
-                          quantity=cart.get(str(product.id)))
+                          quantity=cart.get(str(product.id)),
+                          pick = check)
+                        
             order.save()
         request.session['cart'] = {}
 

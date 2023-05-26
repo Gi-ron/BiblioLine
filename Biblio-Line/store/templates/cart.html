@@ -83,15 +83,54 @@
           <div class="m-2 p-3">
             <form action="/check-out" method="POST">
                 {% csrf_token %}
+
+                {%if country == 'CO'%}
+                <div class="col-12">
+                  <div class="mb-3 form-check">
+                    
+                   <input
+                      type="checkbox"
+                      class="form-check-input"
+                      id="exampleCheck1"
+                      name = "check"
+                    /> 
+                    <label class="form-check-label d-grid gap-2" for="exampleCheck1"
+                      >
+                      Pick it up store <i class="fa-sharp fa-light fa-house" style="color: #FFFFFF;"></i>
+                      </label
+                    >
+                  </div>
+                </div>
+                {%endif%}
                 <div class="form-group">
-                  <label for="">Address</label>
-                  <input type="text" name="address" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                  <label for="">Name</label>
+                  <input type="text" name="name" id="" class="form-control" readonly aria-describedby="helpId"
+                  value="{{first_name}} {{last_name}}">
                   
                 </div>
+
                 <div class="form-group">
                     <label for="">Phone</label>
-                    <input type="text" name="phone" id="" class="form-control" placeholder="" aria-describedby="helpId">
-                  </div>
+                    <input type="text" name="phone" id=""  readonly class="form-control" placeholder="" aria-describedby="helpId"
+                    value="{{phone}}">
+                </div>
+
+                <div class="form-group">
+                  <label for="">Country</label>
+                  <input type="text" name="country" id="" readonly class="form-control" placeholder="" aria-describedby="helpId"
+                  value="{{country}}">
+                </div>
+
+                <div class="form-group">
+                  <label for="">Address</label>
+                  <input type="text" name="address" id="" class="form-control" placeholder="" aria-describedby="helpId"
+                  value="{{address}}">
+                  
+                </div>
+                
+
+                
+
 
                   <input type="submit" class="btn float-right btn-outline-success col-lg-6" value="Check out">
             </form>

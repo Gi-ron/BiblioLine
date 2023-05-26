@@ -1,10 +1,17 @@
 from django.db import models
 from .product import Products
 
+
 class News(models.Model):
-    information = models.CharField(max_length=50)
-    product = models.ForeignKey(Products ,on_delete=models.CASCADE,default=1 )
+    name = models.CharField(max_length=100)
+    information = models.CharField(max_length=250)
+    date_up = models.DateField()
     
+
+    @staticmethod
+    def get_all_news():
+        '''Method for getting all products'''
+        return News.objects.all()
     
     
 
