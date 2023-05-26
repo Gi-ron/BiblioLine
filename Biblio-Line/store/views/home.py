@@ -3,6 +3,7 @@ from django.shortcuts import render , redirect , HttpResponseRedirect
 from django.views import View
 from store.models.product import Products
 from store.models.category import Category
+from store.models.news import News
 
 
 class Index(View):
@@ -47,6 +48,7 @@ def store(request):
     categories = Category.get_all_categories()
     categoryID = request.GET.get('category')
     author = request.GET.get('author')
+    news = News.get_all_news()
     
     if categoryID:
         products = Products.get_all_products_by_categoryid(categoryID)
@@ -55,9 +57,11 @@ def store(request):
     else:
         products = Products.get_all_products()
 
+
     data = {}
     data['products'] = products
     data['categories'] = categories
+    data['news'] = news
 
     print('you are : ', request.session.get('email'))
     return render(request, 'index.html', data)
