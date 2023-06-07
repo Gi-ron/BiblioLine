@@ -16,11 +16,12 @@ class LoginRoot(View):
         password = request.POST.get ('password')
 
         root_password = Root.get_root()
-        if password == root_password.password and username == 'root':
+        if password == root_password.password and username == 'root@gmail.com':
             return render(request, 'root.html')
         else:
             return render(request, 'login_root.html', {'error' : "Invalid"})
 
 def logout_root(request):
     request.session.clear()
-    return redirect('login_root')
+    return redirect('homepage')
+

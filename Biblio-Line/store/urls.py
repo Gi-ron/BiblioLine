@@ -11,6 +11,7 @@ from .views.change_password import ChangePassword
 from .views.account import Account
 from .views.news import NewsViews, Subscribe
 from .views.refund import Refound
+from .views.card import CardViews
 
 from .middlewares.auth import  auth_middleware
 
@@ -31,4 +32,5 @@ urlpatterns = [
     path('news', NewsViews.as_view(), name = 'news'),
     path('refound', Refound.as_view(), name = 'refound'),
     path('subscribe', Subscribe, name = 'subscribe'),
+     path('card', CardViews.as_view(), name = 'card'),
 ]

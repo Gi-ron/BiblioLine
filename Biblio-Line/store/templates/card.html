@@ -1,0 +1,118 @@
+
+
+
+
+
+
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class="container-fluid mt-3">
+    
+    <div class="row">
+        	<!-- filter -->
+
+		<div class="col-lg-3 mx-auto">
+			<div class="list-group" style="margin-bottom: 2rem;">
+
+				<a  href="/account" class="list-group-item list-group-item-action btn btn-outline-success">Account</a>
+
+        <a  href="/change_password" class="list-group-item list-group-item-action btn btn-outline-success ">Password</a>
+
+        <a style="background-color: #0F1C25; color: white;" href="/card" class="list-group-item list-group-item-action btn btn-outline-success "> Cards</a>
+
+			</div>
+		</div>
+        
+        <div class="col-lg-7 rounded mx-auto border pt-1">
+            <div class="text-center col">
+            <!--AGREGAR IMAGEN AQUI-->
+            <!-- <hr> -->
+            <hr>
+            </div>
+                
+                {% csrf_token %}
+
+                {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{error}}
+                    </div>
+                {% endif %}
+
+                {% if good %}
+                    <div class="alert alert-success" role="alert">
+                        {{good}}
+                    </div>
+                {% endif %}
+
+                <div class="container">
+                    <div class="border rounded p-4 m-4">
+                         <p class="display-4 pl-4 ml-4">Your Cards</p>
+                         <button type="submit"  class="btn btn-sm btn-success col-lg-2" href="#" data-toggle="modal" data-target="#addcard"> ++ Add Card</button>
+                         {%if good%}
+                         <small>{{good}}</small>
+                         {%endif%}
+                         <hr>
+                         <table class="table">
+                             <thead>
+                                 <tr>
+                                     <th>#</th>
+                                     <th>Card number</th>
+                                     <th>Titular</th>
+                                     <th>Due Date</th>
+
+                                 </tr>
+                             </thead>
+                             <tbody>
+                                 <tr>
+         
+                                 </tr>
+                                 
+                             </tbody>
+                         </table>
+                    </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="addcard" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Card</h5>
+          <hr>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="m-2 p-3">
+            <form id="add-form" action="/card" method="POST">
+                {% csrf_token %}
+
+                <div class="form-group">
+                  <label for="">Titular</label>
+                  <input type="text" name="titular" id="add-input" class="form-control" aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                    <label for="">Card Number</label>
+                    <input type="text" name="number" id="add-input" class="form-control" aria-describedby="helpId">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Due Date</label>
+                    <input type="text" name="date" id="ad-input" class="form-control" aria-describedby="helpId">
+                  </div>
+                <input type="submit" class="btn float-right btn-outline-success col-lg-6" value="Send">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
