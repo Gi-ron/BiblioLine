@@ -4,6 +4,7 @@ from django.views import  View
 from store.models.product import Products
 from store.models.customer import Customer 
 from geonamescache import GeonamesCache
+from store.models.shop import Shop
 
 
 class Cart(View):
@@ -14,6 +15,8 @@ class Cart(View):
         products = Products.get_products_by_id(ids)
         id = request.session.get('customer')
         customer = Customer.get_customer_by_id(id)
+        shops = Shop.objects.all()
+
         print(customer.first_name)
         print(products)
 
@@ -26,6 +29,7 @@ class Cart(View):
             'country': customer.country,
             'city': customer.city,
             'products' : products ,
+            'shops': shops,
             #'countries': countries
         }
 
